@@ -39,6 +39,7 @@ macOS（Apple Silicon）の設定とアプリのインストールをまとめ�
 | `ghostty/` | Ghostty（ターミナル）の設定 |
 | `claude/` | Claude Code 本体のインストールと全体設定（`~/.claude/CLAUDE.md` と `settings.json`） |
 | `studio/` | BrickLink Studio の Hidden Parts（[V14-LEGO/Misc.-LEGO-Tools](https://github.com/V14-LEGO/Misc.-LEGO-Tools/tree/main/BrickLink%20Studio%20Tools/Hidden%20Parts) から取得）とデフォルトの色。Studio を終了してから実行する |
+| `ideamaker/` | ideaMaker（3D プリンタ用スライサー）を公式の DMG からインストールする。Homebrew の cask は無効化されているため |
 | `lib/link.sh` | setup スクリプトで共通に使う、シンボリックリンクを作る関数 |
 | `update.sh` | Homebrew、oh-my-zsh とプラグインの更新。Brewfile にないアプリの一覧と、Hidden Parts の GitHub との差分も表示する |
 | `check.sh` | スクリプトの構文チェック（`zsh -n`）。push 時に GitHub Actions でも実行する |

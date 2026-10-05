@@ -32,6 +32,8 @@ echo
 echo "######## Brewfile"
 brew bundle --file="$repo_dir/Brewfile"
 
+run ideamaker/install.sh
+
 run macos/dock.sh
 run git/setup.sh
 run ssh/setup.sh
