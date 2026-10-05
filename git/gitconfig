@@ -1,0 +1,20 @@
+# git/setup.sh が ~/.gitconfig の include.path に追加して読み込ませる
+# 作成者の情報は個人情報なのでここには置かず、~/.gitconfig に直接書く
+
+[init]
+	# git init したときのブランチ名
+	defaultBranch = main
+
+[pull]
+	# pull でマージコミットを作らず、リベースする
+	rebase = true
+
+[push]
+	# 初回の push で上流ブランチを自動で設定する
+	autoSetupRemote = true
+
+[core]
+	# コミットメッセージなどを書くエディタ
+	editor = vim
+	# 全体の ignore は既定の ~/.config/git/ignore を読むので excludesfile は設定しない
+	# （git/setup.sh が git/gitignore_global をそこへリンクする）

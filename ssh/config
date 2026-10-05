@@ -1,0 +1,7 @@
+# すべてのホストに共通の設定
+# ~/.ssh/config の先頭から Include して使う（ホストごとの設定は ~/.ssh/config に書く）
+Host *
+  # 鍵を初めて使ったときに ssh-agent へ登録する
+  AddKeysToAgent yes
+  # パスフレーズをキーチェーンに保存する
+  UseKeychain yes

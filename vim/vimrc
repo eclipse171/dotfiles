@@ -1,0 +1,30 @@
+" Vim 標準のおすすめ設定を読み込む
+" ~/.vimrc があると自動では読み込まれないので、ここで読み込む
+source $VIMRUNTIME/defaults.vim
+
+" 表示
+syntax on
+set number
+set cursorline
+set cursorcolumn
+set hlsearch
+
+" インデント
+set autoindent
+set smartindent
+
+" バックアップファイルと undo ファイルを作らない
+set nobackup
+set noundofile
+
+" ヤンクしたテキストを macOS のクリップボードと共有する
+set clipboard+=unnamed
+
+" テキストファイルでは自動で改行しない
+augroup vimrc
+  autocmd!
+  autocmd FileType text setlocal textwidth=0
+augroup END
+
+" % で if / endif などの対応するキーワードにも移動できるようにする
+packadd! matchit

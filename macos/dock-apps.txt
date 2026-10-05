@@ -1,0 +1,22 @@
+# Dock に並べるアプリ（上から順に左→右）
+# 1行に1つ .app のパスを書く。# で始まる行と空行は無視される
+# 編集後に macos/dock.sh を実行すると反映される
+
+/System/Applications/iPhone Mirroring.app
+/System/Applications/Apps.app
+/Applications/Safari.app
+/Applications/Google Chrome.app
+/System/Applications/Mail.app
+/Applications/Discord.app
+/Applications/Slack.app
+/System/Applications/Photos.app
+/System/Applications/Calendar.app
+/System/Applications/Notes.app
+/System/Applications/App Store.app
+/System/Applications/System Settings.app
+/Applications/CotEditor.app
+/Applications/Claude.app
+/Applications/Studio 2.0/Studio.app
+~/Applications/Autodesk Fusion.app
+/Applications/Ghostty.app
+/System/Applications/Utilities/Activity Monitor.app

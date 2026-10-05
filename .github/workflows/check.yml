@@ -1,0 +1,11 @@
+# push と pull request のたびにスクリプトの構文をチェックする
+name: check
+
+on: [push, pull_request]
+
+jobs:
+  check:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: zsh check.sh

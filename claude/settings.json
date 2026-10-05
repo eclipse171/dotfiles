@@ -1,0 +1,41 @@
+{
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  },
+  "permissions": {
+    "blockReadsOutsideWorkingDirectories": true
+  },
+  "model": "opus",
+  "hooks": {
+    "Notification": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r '\"\\(.title)\\n\\(.message)\"' | { IFS= read -r title; IFS= read -r message; osascript -e 'on run argv' -e 'display notification (item 2 of argv) with title (item 1 of argv) sound name \"Glass\"' -e 'end run' \"$title\" \"$message\"; }"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "osascript -e 'display notification \"作業が完了しました。\" with title \"Claude Code\" sound name \"Glass\"'"
+          }
+        ]
+      }
+    ]
+  },
+  "enabledPlugins": {
+    "swift-lsp@claude-plugins-official": true
+  },
+  "language": "japanese",
+  "theme": "dark-daltonized",
+  "editorMode": "normal",
+  "switchModelsOnFlag": false,
+  "tui": "fullscreen"
+}

@@ -1,0 +1,17 @@
+# ~/.zshrc から source される追加設定（zsh/setup.sh が source の行を追加する）
+
+# iCloud Drive の場所（cp foo $icloud のようにも使える）と、そこへ移動するエイリアス
+export icloud="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
+alias cd-icloud='cd "$icloud"'
+
+# Claude Code や uv tool / pipx がコマンドを置く場所
+export PATH="$HOME/.local/bin:$PATH"
+
+# 履歴（共有や重複の扱いなどの基本設定は oh-my-zsh の lib/history.zsh が行う）
+# oh-my-zsh より後に読まれるので、件数はここで上書きする
+HISTSIZE=100000
+SAVEHIST=100000
+# 重複したコマンドは古いほうを削除する
+setopt hist_ignore_all_dups
+# 余分な空白を詰めて保存する
+setopt hist_reduce_blanks

@@ -1,0 +1,12 @@
+# すべてのリポジトリで無視するファイル（~/.config/git/ignore にリンクされる）
+
+# macOS が作るファイル
+.DS_Store
+._*
+
+# エディタの一時ファイル
+*.swp
+*~
+
+# Claude Code の個人用設定
+**/.claude/settings.local.json

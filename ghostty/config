@@ -1,0 +1,34 @@
+# Ghostty の設定（ghostty/setup.sh が ~/.config/ghostty/config にリンクする）
+# 設定できる項目は ghostty +show-config --default --docs で確認できる
+
+# フォント（Ghostty は JetBrains Mono を内蔵しているので、サイズだけ指定する）
+font-size = 14
+
+# テーマ（名前は ghostty +list-themes で確認できる）
+theme = Catppuccin Mocha
+
+# Option を Alt（Meta）として使う。zsh の Alt+b / Alt+f などの単語移動が効く
+# skhd の alt のキーは skhd が先に受け取るので、ここの設定とは衝突しない
+macos-option-as-alt = true
+
+# 見た目
+window-padding-x = 8
+window-padding-y = 8
+macos-titlebar-style = tabs
+# 背景を透過させ、後ろをぼかして文字を読みやすくする
+# background-opacity は再読み込みでは反映されないので、Ghostty の再起動が必要
+background-opacity = 0.7
+background-blur = 0
+
+# 操作
+# 選択したテキストをクリップボードにコピーする
+copy-on-select = clipboard
+mouse-hide-while-typing = true
+# 実行中のプロセスがあっても確認せずに閉じる
+confirm-close-surface = false
+# 終了時のウィンドウとタブを次の起動で復元する
+window-save-state = always
+
+# どこからでも Ctrl+` でドロップダウンのターミナルを出す
+# global: のキーにはアクセシビリティの許可が必要
+keybind = global:ctrl+grave_accent=toggle_quick_terminal
