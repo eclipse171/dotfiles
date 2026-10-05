@@ -4,7 +4,6 @@
 
 /System/Applications/iPhone Mirroring.app
 /System/Applications/Apps.app
-/Applications/Safari.app
 /Applications/Google Chrome.app
 /System/Applications/Mail.app
 /Applications/Discord.app
