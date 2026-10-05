@@ -6,6 +6,8 @@ brew "git"                # Git
 brew "gh"                 # GitHub CLI（ssh 鍵の登録にも使う）
 brew "uv"                 # Python のパッケージ・プロジェクト管理
 brew "pipx"               # Python 製の CLI ツールを個別の環境にインストール
+brew "node"               # Node.js（Slidev などの JavaScript 製ツールの実行環境）
+brew "pnpm"               # Node.js のパッケージ管理（Slidev 公式の推奨）
 
 cask "google-chrome"      # /Applications/Google Chrome.app
 cask "discord"            # /Applications/Discord.app
