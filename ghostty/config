@@ -32,3 +32,9 @@ window-save-state = always
 # どこからでも Ctrl+` でドロップダウンのターミナルを出す
 # global: のキーにはアクセシビリティの許可が必要
 keybind = global:ctrl+grave_accent=toggle_quick_terminal
+
+# SSH
+# 接続先に terminfo（xterm-ghostty）が無いと表示が崩れる（ls が llsls になる など）のを防ぐ
+# ssh-terminfo: 初めて接続するホストへ terminfo を自動で送って登録する
+# ssh-env: 送れなかったときは TERM=xterm-256color にフォールバックする
+shell-integration-features = ssh-terminfo,ssh-env
