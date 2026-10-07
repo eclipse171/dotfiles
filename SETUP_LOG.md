@@ -67,6 +67,14 @@ zsh claude/setup.sh           # ~/.claude/CLAUDE.md と ~/.claude/settings.json 
 | `~/.zshrc` にあった `$icloud` を `zshrc.local` に移し、`cd-icloud` はそれを使う形に | `zsh/zshrc.local` |
 | 構文チェックの対象に `zshrc.local` を追加 | `check.sh` |
 | Vimari をやめて Vimium（Chrome 拡張）に。Vimari は Rosetta 2 が必要で、Rosetta 2 は廃止予定のため。mas も使わなくなったので削除 | `Brewfile` + `install.sh` + `update.sh` |
+| Slidev 用に node と pnpm を Brewfile でインストール | `Brewfile` |
+| ideaMaker を公式の DMG からインストールし、Dock の Fusion の次に追加 | `ideamaker/install.sh` + `install.sh` + `macos/dock-apps.txt` |
+
+### 2026-10-07
+
+| 作業 | スクリプト |
+|---|---|
+| Docker の実行環境として OrbStack を Brewfile でインストール（初回起動は手動） | `Brewfile` |
 
 ## スクリプトにできないもの
 
@@ -76,6 +84,8 @@ zsh claude/setup.sh           # ~/.claude/CLAUDE.md と ~/.claude/settings.json 
   システム設定 → プライバシーとセキュリティ → アクセシビリティ で yabai と skhd を許可する。Ghostty も、どこからでも呼び出すキー（`global:` のキー）を使うために許可する。TCC で保護されているためスクリプトでは設定できない。
 - **Autodesk Fusion のインストール**
   Homebrew の cask `autodesk-fusion` はあるが、ダウンロードしたインストーラー (Fusion Client Downloader) を起動するだけなので Brewfile には入れていない。公式サイトからインストーラーを入手して手動でインストールする（`~/Applications/Autodesk Fusion.app` に入る）。
+- **OrbStack の初回起動**
+  Brewfile でインストールしたあと、一度 OrbStack を起動して初期設定（Docker を選び、求められたら管理者パスワードを入力）を済ませる。これで `docker` コマンドが使えるようになる。
 - **Vimium のインストール**
   Chrome Web Store の拡張は Homebrew では入れられないので、Chrome で https://chromewebstore.google.com/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb を開いて追加する。
 - **GitHub へのログイン**

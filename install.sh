@@ -51,6 +51,7 @@ cat <<'EOF'
 - システム設定 → プライバシーとセキュリティ → アクセシビリティ で yabai と skhd と Ghostty を許可する
 - Chrome で Vimium をインストールする（https://chromewebstore.google.com/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb）
 - Autodesk Fusion を公式サイトからインストールする
+- OrbStack を一度起動して初期設定する（Docker を選び、求められたら管理者パスワードを入力）
 - BrickLink Studio を一度起動して終了し、zsh studio/setup.sh を再実行してデフォルトの色を設定する
 - ウィジェットを配置する
 - ログアウトして、キーボードと外観の設定を反映する

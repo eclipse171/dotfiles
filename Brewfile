@@ -16,3 +16,4 @@ cask "coteditor"          # /Applications/CotEditor.app
 cask "claude"             # /Applications/Claude.app
 cask "bricklink-studio"   # /Applications/Studio 2.0/Studio.app（pkg でインストール）
 cask "ghostty"            # /Applications/Ghostty.app
+cask "orbstack"           # /Applications/OrbStack.app（Docker の実行環境。docker コマンドも入る）
