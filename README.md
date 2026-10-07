@@ -57,6 +57,68 @@ macOS（Apple Silicon）の設定とアプリのインストールをまとめ�
 `zsh update.sh` を実行する。最後に Brewfile にないアプリが表示されるので、使い続けるものは Brewfile に追加し、不要なものは `brew uninstall` で削除する。
 Hidden Parts に差分が表示されたときは、Studio を終了してから `zsh studio/setup.sh` を実行すると GitHub の内容で置き換わる（手元のファイルは `Hidden Parts.bak` に退避される）。
 
+## 外から自宅の Mac に ssh する
+
+自宅の Mac には Tailscale 経由で ssh する。自宅の Mac は鍵でしかログインできない（パスワードでのログインは無効）ので、新しい PC の公開鍵は、すでに入れる PC から、または自宅の Mac の前で登録する。
+
+### 自宅の Mac の設定
+
+| 項目 | 設定 |
+|---|---|
+| リモートログイン | システム設定 → 一般 → 共有 → リモートログインを ON にし、アクセスは自分のユーザーだけにする |
+| sshd | `/etc/ssh/sshd_config.d/100-hardening.conf` に下の内容を書く。同じ項目は先に読んだファイルが優先されるので、`100-macos.conf` より前に並ぶ名前にする |
+| スリープ | 電源につないでいる間は `sudo pmset -c sleep 0`。ノート型はふたを閉めるとスリープするので、開けたまま置く |
+| Tailscale | Key expiry を無効にする（[Appendix](#自宅の-mac-の-tailscale-の-key-expiry)） |
+
+```
+PasswordAuthentication no
+KbdInteractiveAuthentication no
+PermitRootLogin no
+AllowUsers <自宅の Mac のユーザー名>
+```
+
+書いたら `sudo sshd -t` で構文を確認する。sshd は接続のたびに起動するので、次の接続から設定が反映される。今つながっている ssh は、別のウィンドウから鍵で入れることを確認するまで閉じない。
+
+### 新しい PC から入れるようにする
+
+1. `install.sh` で ssh 鍵の作成と Tailscale へのログインを済ませておく
+2. 新しい PC の公開鍵（`~/.ssh/id_ed25519.pub`）を、すでに入れる PC に AirDrop などで渡し、その PC で自宅の Mac に登録する
+
+   ```sh
+   ssh home 'cat >> ~/.ssh/authorized_keys' < id_ed25519.pub
+   ```
+
+   すでに入れる PC がないときは、自宅の Mac の前で `~/.ssh/authorized_keys` の末尾に公開鍵の 1 行を追記する。
+3. 新しい PC の `~/.ssh/config` の末尾に追記する（ホストごとの設定はリポジトリではなく `~/.ssh/config` に書く）。IP は `tailscale status` で確認する
+
+   ```
+   Host home
+     HostName <自宅の Mac の Tailscale IP>
+     User <自宅の Mac のユーザー名>
+   ```
+
+4. `ssh home` で接続する。初回はホスト鍵のフィンガープリントを聞かれるので、すでに入れる PC で `ssh-keygen -lF <自宅の Mac の Tailscale IP>` を実行し、表示される値と同じなら `yes` と答える
+5. 自宅以外のネットワーク（スマホのテザリングなど）からも `ssh home` で入れることを確認する
+
+### PC を手放す・なくしたとき
+
+その PC の公開鍵の行を、自宅の Mac の `~/.ssh/authorized_keys` から削除し、Tailscale の管理画面からそのマシンも削除する。
+`keygen.sh` で作った鍵は、どの PC でもコメントが同じメールアドレスになるので、フィンガープリントで見分ける。
+
+```sh
+ssh home 'ssh-keygen -lf ~/.ssh/authorized_keys'   # 登録されている鍵の一覧
+ssh-keygen -lf ~/.ssh/id_ed25519.pub              # その PC の鍵（手放す前に控えておく）
+```
+
+### つながらないとき
+
+| 症状 | 確認すること |
+|---|---|
+| `Permission denied (publickey)` | 公開鍵が `authorized_keys` に登録されているか。`User` が正しいか |
+| タイムアウトする | 両方の PC で Tailscale がつながっているか（`tailscale status`）。自宅の Mac がスリープしていないか、Key expiry が切れていないか |
+| `Host key verification failed` | 入力を受け付けない環境（Claude Code の `!` など）で初めて接続した。普通のターミナルで実行する |
+| `REMOTE HOST IDENTIFICATION HAS CHANGED` | 自宅の Mac を初期化したなどで、ホスト鍵が変わった。心当たりがあれば `ssh-keygen -R <自宅の Mac の Tailscale IP>` で古い鍵を消して接続し直す。なければ接続しない |
+
 ## Appendix
 
 ### 自宅の Mac の Tailscale の Key expiry
