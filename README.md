@@ -63,7 +63,7 @@ Hidden Parts に差分が表示されたときは、Studio を終了してから
 
 Tailscale の鍵にはデフォルトで有効期限（180日）があり、期限が切れると再ログインするまで tailnet から外れる。外出先から ssh で入る自宅の Mac で期限が切れると、自宅に戻るまで入れなくなる。
 
-そのため、自宅の Mac は管理画面（https://login.tailscale.com/admin/machines）でそのマシンのメニューから **Disable key expiry** を選ぶ。持ち歩く Mac は、紛失したときに期限で無効になるほうが安全なので、期限を残したままにする。
+そのため、自宅の Mac は管理画面（ https://login.tailscale.com/admin/machines ）でそのマシンのメニューから **Disable key expiry** を選ぶ。持ち歩く Mac は、紛失したときに期限で無効になるほうが安全なので、期限を残したままにする。
 
 ### `admin:ssh_signing_key` スコープの warning
 
