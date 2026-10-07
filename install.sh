@@ -38,6 +38,7 @@ run macos/dock.sh
 run git/setup.sh
 run ssh/setup.sh
 run ssh/keygen.sh
+run tailscale/setup.sh
 run yabai/setup.sh
 run zsh/setup.sh
 run vim/setup.sh
@@ -52,6 +53,7 @@ cat <<'EOF'
 - Chrome で Vimium をインストールする（https://chromewebstore.google.com/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb）
 - Autodesk Fusion を公式サイトからインストールする
 - OrbStack を一度起動して初期設定する（Docker を選び、求められたら管理者パスワードを入力）
+- 外から ssh で入る自宅の Mac は、Tailscale の管理画面（https://login.tailscale.com/admin/machines）で Disable key expiry を選ぶ
 - BrickLink Studio を一度起動して終了し、zsh studio/setup.sh を再実行してデフォルトの色を設定する
 - ウィジェットを配置する
 - ログアウトして、キーボードと外観の設定を反映する

@@ -18,6 +18,7 @@ macOS（Apple Silicon）の設定とアプリのインストールをまとめ�
    - git の名前とメールアドレス
    - ssh 鍵のパスフレーズ
    - GitHub へのログイン（ブラウザ）
+   - Tailscale へのログイン（ブラウザ）
 2. 最後に表示される手動の作業を行う（アクセシビリティの許可など）
 
 各スクリプトは再実行しても安全なので、途中で失敗したらもう一度 `zsh install.sh` を実行すればよい。
@@ -33,6 +34,7 @@ macOS（Apple Silicon）の設定とアプリのインストールをまとめ�
 | `macos/dock.sh`, `macos/dock-apps.txt` | Dock に並べるアプリ |
 | `git/` | git の共通設定（`~/.gitconfig` から include）と全体の ignore |
 | `ssh/` | ssh の共通設定（`~/.ssh/config` から Include）と、鍵の作成・GitHub への登録 |
+| `tailscale/` | Tailscale（VPN）のデーモンを root で常駐させてログインする。外から自宅の Mac に ssh するため。自宅の Mac は Key expiry を無効にする（[Appendix](#自宅の-mac-の-tailscale-の-key-expiry)） |
 | `yabai/`, `skhd/` | タイル型ウィンドウマネージャとキー割り当て |
 | `zsh/` | oh-my-zsh の設定と、`~/.zshrc` から読み込むエイリアス・PATH |
 | `vim/` | vimrc |
@@ -56,6 +58,12 @@ macOS（Apple Silicon）の設定とアプリのインストールをまとめ�
 Hidden Parts に差分が表示されたときは、Studio を終了してから `zsh studio/setup.sh` を実行すると GitHub の内容で置き換わる（手元のファイルは `Hidden Parts.bak` に退避される）。
 
 ## Appendix
+
+### 自宅の Mac の Tailscale の Key expiry
+
+Tailscale の鍵にはデフォルトで有効期限（180日）があり、期限が切れると再ログインするまで tailnet から外れる。外出先から ssh で入る自宅の Mac で期限が切れると、自宅に戻るまで入れなくなる。
+
+そのため、自宅の Mac は管理画面（https://login.tailscale.com/admin/machines）でそのマシンのメニューから **Disable key expiry** を選ぶ。持ち歩く Mac は、紛失したときに期限で無効になるほうが安全なので、期限を残したままにする。
 
 ### `admin:ssh_signing_key` スコープの warning
 
