@@ -9,6 +9,7 @@ brew "pipx"               # Python 製の CLI ツールを個別の環境にイ�
 brew "node"               # Node.js（Slidev などの JavaScript 製ツールの実行環境）
 brew "pnpm"               # Node.js のパッケージ管理（Slidev 公式の推奨）
 brew "tailscale"          # VPN（外から自宅の Mac に ssh する。GUI なしのデーモン版。起動とログインは tailscale/setup.sh）
+brew "fzf"                # あいまい検索（Ctrl-R で履歴、Ctrl-T でファイル、Alt-C でディレクトリ移動。zsh/zshrc.local で有効にする）
 
 cask "google-chrome"      # /Applications/Google Chrome.app
 cask "discord"            # /Applications/Discord.app

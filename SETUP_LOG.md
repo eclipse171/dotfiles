@@ -76,6 +76,12 @@ zsh claude/setup.sh           # ~/.claude/CLAUDE.md と ~/.claude/settings.json 
 |---|---|
 | Docker の実行環境として OrbStack を Brewfile でインストール（初回起動は手動） | `Brewfile` |
 
+### 2026-10-08
+
+| 作業 | スクリプト |
+|---|---|
+| fzf を Brewfile でインストールし、キー割り当て（Ctrl-R / Ctrl-T / Alt-C）を有効に | `Brewfile` + `zsh/zshrc.local` |
+
 ## スクリプトにできないもの
 
 - **ウィジェットの配置（どのウィジェットをどこに置くか）**
