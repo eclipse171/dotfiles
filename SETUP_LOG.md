@@ -82,6 +82,7 @@ zsh claude/setup.sh           # ~/.claude/CLAUDE.md と ~/.claude/settings.json 
 |---|---|
 | fzf を Brewfile でインストールし、キー割り当て（Ctrl-R / Ctrl-T / Alt-C）を有効に | `Brewfile` + `zsh/zshrc.local` |
 | README に手順として書いていた自宅の Mac の sshd の hardening とスリープの無効化を、スクリプトに（`install.sh` からは実行しない） | `home/setup.sh` |
+| git の設定を追加（`fetch.prune`, `diff.algorithm = histogram`, `merge.conflictstyle = zdiff3`, `rerere.enabled`） | `git/gitconfig` |
 
 ## スクリプトにできないもの
 

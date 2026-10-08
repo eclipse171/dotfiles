@@ -18,3 +18,19 @@
 	editor = vim
 	# 全体の ignore は既定の ~/.config/git/ignore を読むので excludesfile は設定しない
 	# （git/setup.sh が git/gitignore_global をそこへリンクする）
+
+[fetch]
+	# fetch / pull のときに、リモートで削除されたブランチの追跡ブランチ（origin/foo など）を消す
+	prune = true
+
+[diff]
+	# 行の移動や似た行が多いときに、デフォルトの myers より読みやすい差分を出す
+	algorithm = histogram
+
+[merge]
+	# コンフリクト箇所に、両方の変更に加えて元の内容（共通の祖先）も表示する
+	conflictstyle = zdiff3
+
+[rerere]
+	# 一度解決したコンフリクトの解決方法を記録し、同じコンフリクトが再び起きたら自動で適用する
+	enabled = true
