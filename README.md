@@ -36,6 +36,7 @@ macOS（Apple Silicon）の設定とアプリのインストールをまとめ�
 | `git/` | git の共通設定（`~/.gitconfig` から include）と全体の ignore |
 | `ssh/` | ssh の共通設定（`~/.ssh/config` から Include）と、鍵の作成・GitHub への登録 |
 | `tailscale/` | Tailscale（VPN）のデーモンを root で常駐させてログインする。外から自宅の Mac に ssh するため。自宅の Mac は Key expiry を無効にする（[Appendix](#自宅の-mac-の-tailscale-の-key-expiry)） |
+| `home/` | 外から ssh で入る自宅の Mac でだけ実行する設定（sshd の hardening とスリープの無効化）。`install.sh` からは実行しない（[自宅の Mac の設定](#自宅の-mac-の設定)） |
 | `yabai/`, `skhd/` | タイル型ウィンドウマネージャとキー割り当て |
 | `zsh/` | oh-my-zsh の設定と、`~/.zshrc` から読み込むエイリアス・PATH |
 | `vim/` | vimrc |
@@ -64,21 +65,16 @@ Hidden Parts に差分が表示されたときは、Studio を終了してから
 
 ### 自宅の Mac の設定
 
+自宅の Mac で `zsh home/setup.sh` を実行する（sudo のパスワードを求められる）。sshd とスリープはスクリプトが設定し、リモートログインと Tailscale は手動で設定する。再実行しても安全で、リモートログインが OFF のときや、`~/.ssh/authorized_keys` に公開鍵がないときは警告を表示する。
+
 | 項目 | 設定 |
 |---|---|
-| リモートログイン | システム設定 → 一般 → 共有 → リモートログインを ON にし、アクセスは自分のユーザーだけにする |
-| sshd | `/etc/ssh/sshd_config.d/100-hardening.conf` に下の内容を書く。同じ項目は先に読んだファイルが優先されるので、`100-macos.conf` より前に並ぶ名前にする |
-| スリープ | 電源につないでいる間は `sudo pmset -c sleep 0`。ノート型はふたを閉めるとスリープするので、開けたまま置く |
-| Tailscale | Key expiry を無効にする（[Appendix](#自宅の-mac-の-tailscale-の-key-expiry)） |
+| リモートログイン | 手動。システム設定 → 一般 → 共有 → リモートログインを ON にし、アクセスは自分のユーザーだけにする |
+| sshd | `home/setup.sh`。`/etc/ssh/sshd_config.d/100-hardening.conf` に、パスワードと root でのログインを無効にし、実行したユーザーだけを許可する設定を書く。同じ項目は先に読んだファイルが優先されるので、`100-macos.conf` より前に並ぶ名前にしている |
+| スリープ | `home/setup.sh`。電源につないでいる間はスリープしない（`pmset -c sleep 0`）。ノート型はふたを閉めるとスリープするので、開けたまま置く |
+| Tailscale | 手動。Key expiry を無効にする（[Appendix](#自宅の-mac-の-tailscale-の-key-expiry)） |
 
-```
-PasswordAuthentication no
-KbdInteractiveAuthentication no
-PermitRootLogin no
-AllowUsers <自宅の Mac のユーザー名>
-```
-
-書いたら `sudo sshd -t` で構文を確認する。sshd は接続のたびに起動するので、次の接続から設定が反映される。今つながっている ssh は、別のウィンドウから鍵で入れることを確認するまで閉じない。
+スクリプトは sshd の設定を書いたあと `sudo sshd -t` で構文を確認し、エラーなら元に戻す。sshd は接続のたびに起動するので、次の接続から設定が反映される。ssh でつないだまま実行したときは、別のウィンドウから鍵で入れることを確認するまで今の接続を閉じない。
 
 ### 新しい PC から入れるようにする
 

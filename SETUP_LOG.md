@@ -81,6 +81,7 @@ zsh claude/setup.sh           # ~/.claude/CLAUDE.md と ~/.claude/settings.json 
 | 作業 | スクリプト |
 |---|---|
 | fzf を Brewfile でインストールし、キー割り当て（Ctrl-R / Ctrl-T / Alt-C）を有効に | `Brewfile` + `zsh/zshrc.local` |
+| README に手順として書いていた自宅の Mac の sshd の hardening とスリープの無効化を、スクリプトに（`install.sh` からは実行しない） | `home/setup.sh` |
 
 ## スクリプトにできないもの
 
