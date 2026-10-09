@@ -3,6 +3,30 @@
     "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
   },
   "permissions": {
+    "allow": [
+      "Bash(ls:*)",
+      "Bash(git:*)",
+      "Bash(docker compose:*)"
+    ],
+    "deny": [
+      "Read(**/.env)",
+      "Read(**/.env.*)",
+      "Read(**/secrets/**)",
+      "Edit(**/.env)",
+      "Edit(**/.env.*)",
+      "Bash(cat:*.env*)",
+      "Bash(git push origin main)",
+      "Bash(git push --force:*)",
+      "Bash(rm -rf:*)",
+      "Bash(curl:*)",
+      "Bash(wget:*)"
+    ],
+    "ask": [
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(gh pr merge:*)"
+    ],
+    "defaultMode": "auto",
     "blockReadsOutsideWorkingDirectories": true
   },
   "model": "opus",
@@ -34,8 +58,8 @@
     "swift-lsp@claude-plugins-official": true
   },
   "language": "japanese",
+  "tui": "fullscreen",
   "theme": "dark-daltonized",
   "editorMode": "normal",
-  "switchModelsOnFlag": false,
-  "tui": "fullscreen"
+  "switchModelsOnFlag": false
 }
