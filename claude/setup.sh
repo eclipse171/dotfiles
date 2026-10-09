@@ -19,7 +19,8 @@ echo "==> 設定ファイルをリンクします"
 # リポジトリのファイル と リンクを置く場所
 for src dest in \
   "$repo_dir/claude/CLAUDE.md"     "$HOME/.claude/CLAUDE.md" \
-  "$repo_dir/claude/settings.json" "$HOME/.claude/settings.json"; do
+  "$repo_dir/claude/settings.json" "$HOME/.claude/settings.json" \
+  "$repo_dir/claude/hooks/guard-bash.sh" "$HOME/.claude/hooks/guard-bash.sh"; do
   link_file "$src" "$dest"
 done
 
