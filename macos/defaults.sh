@@ -54,6 +54,8 @@ defaults write com.apple.WindowManager StageManagerHideWidgets -int 0
 echo "==> Finder"
 # すべてのファイル名拡張子を表示
 defaults write -g AppleShowAllExtensions -bool true
+# デフォルトの表示形式をカラム表示にする（icnv / Nlsv / clmv / glyv）
+defaults write com.apple.finder FXPreferredViewStyle -string clmv
 killall Finder
 
 echo "==> メニューバー"
