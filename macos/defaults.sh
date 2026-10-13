@@ -56,6 +56,10 @@ echo "==> Finder"
 defaults write -g AppleShowAllExtensions -bool true
 # デフォルトの表示形式をカラム表示にする（icnv / Nlsv / clmv / glyv）
 defaults write com.apple.finder FXPreferredViewStyle -string clmv
+# ネットワークドライブ（SMB / AFP / NFS）に .DS_Store を作らない
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+# USB・外付けドライブに .DS_Store を作らない
+defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 killall Finder
 
 echo "==> メニューバー"
