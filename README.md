@@ -36,7 +36,7 @@ macOS（Apple Silicon）の設定とアプリのインストールをまとめ�
 | `git/` | git の共通設定（`~/.gitconfig` から include）と全体の ignore |
 | `ssh/` | ssh の共通設定（`~/.ssh/config` から Include）と、鍵の作成・GitHub への登録 |
 | `tailscale/` | Tailscale（VPN）のデーモンを root で常駐させてログインする。外から自宅の Mac に ssh するため。自宅の Mac は Key expiry を無効にする（[Appendix](#自宅の-mac-の-tailscale-の-key-expiry)） |
-| `home/` | 外から ssh で入る自宅の Mac でだけ実行する設定（sshd の hardening とスリープの無効化）。`install.sh` からは実行しない（[自宅の Mac の設定](#自宅の-mac-の設定)） |
+| `home/` | 外から ssh で入る自宅の Mac でだけ実行する設定（sshd の hardening、スリープの無効化、Tailscale の経路の監視）。`install.sh` からは実行しない（[自宅の Mac の設定](#自宅の-mac-の設定)） |
 | `yabai/`, `skhd/` | タイル型ウィンドウマネージャとキー割り当て |
 | `zsh/` | oh-my-zsh の設定と、`~/.zshrc` から読み込むエイリアス・PATH |
 | `vim/` | vimrc |
@@ -65,7 +65,7 @@ Hidden Parts に差分が表示されたときは、Studio を終了してから
 
 ### 自宅の Mac の設定
 
-自宅の Mac で `zsh home/setup.sh` を実行する（sudo のパスワードを求められる）。sshd とスリープはスクリプトが設定し、リモートログインと Tailscale は手動で設定する。再実行しても安全で、リモートログインが OFF のときや、`~/.ssh/authorized_keys` に公開鍵がないときは警告を表示する。
+自宅の Mac で `zsh home/setup.sh` を実行する（sudo のパスワードを求められる）。sshd、スリープ、Tailscale の経路の監視はスクリプトが設定し、リモートログインと Tailscale の Key expiry は手動で設定する。再実行しても安全で、リモートログインが OFF のときや、`~/.ssh/authorized_keys` に公開鍵がないときは警告を表示する。
 
 | 項目 | 設定 |
 |---|---|
@@ -73,6 +73,7 @@ Hidden Parts に差分が表示されたときは、Studio を終了してから
 | sshd | `home/setup.sh`。`/etc/ssh/sshd_config.d/100-hardening.conf` に、パスワードと root でのログインを無効にし、実行したユーザーだけを許可する設定を書く。同じ項目は先に読んだファイルが優先されるので、`100-macos.conf` より前に並ぶ名前にしている |
 | スリープ | `home/setup.sh`。電源につないでいる間はスリープしない（`pmset -c sleep 0`）。ノート型はふたを閉めるとスリープするので、開けたまま置く |
 | Tailscale | 手動。Key expiry を無効にする（[Appendix](#自宅の-mac-の-tailscale-の-key-expiry)） |
+| Tailscale の経路の監視 | `home/setup.sh`。tailscaled は起動したときに経路を登録し、あとで経路表から消えても登録し直さないので、消えると tailscaled が動いていても Tailscale 経由ではつながらなくなる。`home/tailscale-watchdog.sh` を `/usr/local/libexec` に、`home/local.dotfiles.tailscale-watchdog.plist` を `/Library/LaunchDaemons` に root の持ち物としてコピーし、root の launchd で 1 分ごとに実行する。経路が消えていたら tailscaled を再起動し、`/var/log/tailscale-watchdog.log` に記録する |
 
 スクリプトは sshd の設定を書いたあと `sudo sshd -t` で構文を確認し、エラーなら元に戻す。sshd は接続のたびに起動するので、次の接続から設定が反映される。ssh でつないだまま実行したときは、別のウィンドウから鍵で入れることを確認するまで今の接続を閉じない。
 
@@ -113,6 +114,7 @@ ssh-keygen -lf ~/.ssh/id_ed25519.pub              # その PC の鍵（手放す
 |---|---|
 | `Permission denied (publickey)` | 公開鍵が `authorized_keys` に登録されているか。`User` が正しいか |
 | タイムアウトする | 両方の PC で Tailscale がつながっているか（`tailscale status`）。自宅の Mac がスリープしていないか、Key expiry が切れていないか |
+| `tailscale ping` は応答するのにタイムアウトする | 自宅の Mac の Tailscale の経路が消えている。経路の監視を登録していれば 1 分ほどで戻る。戻らなければ、自宅の Mac で `/var/log/tailscale-watchdog.log` を確認し、`sudo launchctl kickstart -k system/sh.brew.tailscale` で tailscaled を再起動する |
 | `Host key verification failed` | 入力を受け付けない環境（Claude Code の `!` など）で初めて接続した。普通のターミナルで実行する |
 | `REMOTE HOST IDENTIFICATION HAS CHANGED` | 自宅の Mac を初期化したなどで、ホスト鍵が変わった。心当たりがあれば `ssh-keygen -R <自宅の Mac の Tailscale IP>` で古い鍵を消して接続し直す。なければ接続しない |
 

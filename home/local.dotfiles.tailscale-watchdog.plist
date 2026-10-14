@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!-- tailscale-watchdog.sh を root で 1 分ごとに実行する。home/setup.sh が /Library/LaunchDaemons にコピーして登録する -->
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string>local.dotfiles.tailscale-watchdog</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>/usr/local/libexec/tailscale-watchdog.sh</string>
+	</array>
+	<key>StartInterval</key>
+	<integer>60</integer>
+	<key>StandardOutPath</key>
+	<string>/var/log/tailscale-watchdog.log</string>
+	<key>StandardErrorPath</key>
+	<string>/var/log/tailscale-watchdog.log</string>
+</dict>
+</plist>

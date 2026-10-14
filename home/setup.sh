@@ -1,5 +1,5 @@
 #!/bin/zsh
-# 外から ssh で入る自宅の Mac で、sshd の hardening と、電源につないでいる間のスリープの無効化を行う
+# 外から ssh で入る自宅の Mac で、sshd の hardening、電源につないでいる間のスリープの無効化、Tailscale の経路の監視の登録を行う
 # install.sh からは実行しない。自宅の Mac でだけ、単独で実行する（sudo のパスワードを求められる）
 # リモートログインの ON と Tailscale の Key expiry の無効化は手動で行う（README の「自宅の Mac の設定」）
 set -eu
@@ -57,6 +57,29 @@ if nc -z -G 1 127.0.0.1 22 >/dev/null 2>&1; then
 else
   # コマンドで ON にするにはターミナルにフルディスクアクセスが必要なので、設定アプリで行う
   echo "    ! OFF です。システム設定 → 一般 → 共有 → リモートログイン を ON にし、アクセスは自分のユーザーだけにしてください" >&2
+fi
+
+echo "==> Tailscale の経路の監視"
+# root が実行するファイルは root の持ち物としてコピーし、このユーザーの権限では書き換えられないようにする
+src_dir=${0:A:h}
+label=local.dotfiles.tailscale-watchdog
+script=/usr/local/libexec/tailscale-watchdog.sh
+plist=/Library/LaunchDaemons/$label.plist
+if cmp -s "$src_dir/tailscale-watchdog.sh" "$script"; then
+  echo "    設定済み: $script"
+else
+  sudo install -d -o root -g wheel -m 755 "${script:h}"
+  sudo install -o root -g wheel -m 755 "$src_dir/tailscale-watchdog.sh" "$script"
+  echo "    + $script"
+fi
+if cmp -s "$src_dir/$label.plist" "$plist" && launchctl print "system/$label" >/dev/null 2>&1; then
+  echo "    設定済み: $plist"
+else
+  sudo install -o root -g wheel -m 644 "$src_dir/$label.plist" "$plist"
+  # 登録済みのときは、新しい plist を読み込ませるために一度外す
+  sudo launchctl bootout "system/$label" 2>/dev/null || true
+  sudo launchctl bootstrap system "$plist"
+  echo "    + $plist（再起動したときは /var/log/tailscale-watchdog.log に記録する）"
 fi
 
 echo "完了"
