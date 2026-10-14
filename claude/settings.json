@@ -64,6 +64,10 @@
     "swift-lsp@claude-plugins-official": true
   },
   "language": "japanese",
+  "statusLine": {
+    "type": "command",
+    "command": "/usr/bin/python3 -I \"$HOME/.claude/statusline.py\""
+  },
   "tui": "fullscreen",
   "theme": "dark-daltonized",
   "editorMode": "normal",

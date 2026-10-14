@@ -20,7 +20,8 @@ echo "==> 設定ファイルをリンクします"
 for src dest in \
   "$repo_dir/claude/CLAUDE.md"     "$HOME/.claude/CLAUDE.md" \
   "$repo_dir/claude/settings.json" "$HOME/.claude/settings.json" \
-  "$repo_dir/claude/hooks/guard-bash.sh" "$HOME/.claude/hooks/guard-bash.sh"; do
+  "$repo_dir/claude/hooks/guard-bash.sh" "$HOME/.claude/hooks/guard-bash.sh" \
+  "$repo_dir/claude/statusline.py" "$HOME/.claude/statusline.py"; do
   link_file "$src" "$dest"
 done
 

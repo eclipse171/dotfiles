@@ -19,4 +19,14 @@ for file shell in \
   fi
 done
 
+# Python のスクリプトは ast で構文だけを確認する（py_compile と違って .pyc を作らない）
+for file in $(git -C "$repo_dir" ls-files --cached --others --exclude-standard '*.py'); do
+  if python3 -c 'import ast, sys; ast.parse(open(sys.argv[1], encoding="utf-8").read(), sys.argv[1])' "$repo_dir/$file"; then
+    echo "    ok: $file"
+  else
+    echo "    ! 構文エラー: $file" >&2
+    failed=1
+  fi
+done
+
 exit $failed
