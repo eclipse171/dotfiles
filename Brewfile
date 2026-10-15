@@ -10,6 +10,8 @@ brew "node"               # Node.js（Slidev などの JavaScript 製ツール�
 brew "pnpm"               # Node.js のパッケージ管理（Slidev 公式の推奨）
 brew "tailscale"          # VPN（外から自宅の Mac に ssh する。GUI なしのデーモン版。起動とログインは tailscale/setup.sh）
 brew "fzf"                # あいまい検索（Ctrl-R で履歴、Ctrl-T でファイル、Alt-C でディレクトリ移動。zsh/zshrc.local で有効にする）
+brew "poppler"            # PDF を文字にする（pdftotext・pdftoppm。Claude Code の imozuru スキルが論文を読むのに使う）
+brew "tesseract"          # OCR（文字の層が無いスキャン PDF を imozuru が読むのに使う。英語のみ）
 
 cask "google-chrome"      # /Applications/Google Chrome.app
 cask "discord"            # /Applications/Discord.app
