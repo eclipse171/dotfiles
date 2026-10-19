@@ -77,5 +77,6 @@
   "tui": "fullscreen",
   "theme": "dark-daltonized",
   "editorMode": "normal",
-  "switchModelsOnFlag": false
+  "switchModelsOnFlag": false,
+  "enableWorkflows": true
 }
