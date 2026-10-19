@@ -65,7 +65,8 @@
     "command": "/usr/bin/python3 -I \"$HOME/.claude/statusline.py\""
   },
   "enabledPlugins": {
-    "swift-lsp@claude-plugins-official": true
+    "swift-lsp@claude-plugins-official": true,
+    "claude-security@claude-plugins-official": true
   },
   "language": "japanese",
   "modelSettings": {
