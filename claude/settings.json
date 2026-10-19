@@ -60,13 +60,18 @@
       }
     ]
   },
+  "statusLine": {
+    "type": "command",
+    "command": "/usr/bin/python3 -I \"$HOME/.claude/statusline.py\""
+  },
   "enabledPlugins": {
     "swift-lsp@claude-plugins-official": true
   },
   "language": "japanese",
-  "statusLine": {
-    "type": "command",
-    "command": "/usr/bin/python3 -I \"$HOME/.claude/statusline.py\""
+  "modelSettings": {
+    "claude-opus-5-5": {
+      "effortLevel": "high"
+    }
   },
   "tui": "fullscreen",
   "theme": "dark-daltonized",
