@@ -21,7 +21,8 @@ for src dest in \
   "$repo_dir/claude/CLAUDE.md"     "$HOME/.claude/CLAUDE.md" \
   "$repo_dir/claude/settings.json" "$HOME/.claude/settings.json" \
   "$repo_dir/claude/hooks/guard-bash.sh" "$HOME/.claude/hooks/guard-bash.sh" \
-  "$repo_dir/claude/statusline.py" "$HOME/.claude/statusline.py"; do
+  "$repo_dir/claude/statusline.py" "$HOME/.claude/statusline.py" \
+  "$repo_dir/claude/skills/imozuru" "$HOME/.claude/skills/imozuru"; do
   link_file "$src" "$dest"
 done
 

@@ -41,7 +41,7 @@ macOS（Apple Silicon）の設定とアプリのインストールをまとめ�
 | `zsh/` | oh-my-zsh の設定と、`~/.zshrc` から読み込むエイリアス・PATH |
 | `vim/` | vimrc |
 | `ghostty/` | Ghostty（ターミナル）の設定 |
-| `claude/` | Claude Code 本体のインストールと全体設定（`~/.claude/CLAUDE.md` と `settings.json`）、statusline（`statusline.py`。作業場所・コンテキスト・利用枠を表示する。送信先の設定ファイル `~/.config/claude-usage-forward/config.json` がある Mac では、通知などに使えるよう利用枠を外部へ送る。設定ファイルはトークンを含むためリポジトリに入れない） |
+| `claude/` | Claude Code 本体のインストールと全体設定（`~/.claude/CLAUDE.md` と `settings.json`）、statusline（`statusline.py`。作業場所・コンテキスト・利用枠を表示する。送信先の設定ファイル `~/.config/claude-usage-forward/config.json` がある Mac では、通知などに使えるよう利用枠を外部へ送る。設定ファイルはトークンを含むためリポジトリに入れない）、スキル（`skills/imozuru/`。[MaryCache/imozuru](https://github.com/MaryCache/imozuru) の `d6af298` をコピーしたもの。上流を取り込むときは差分を読んでから入れる） |
 | `studio/` | BrickLink Studio の Hidden Parts（[V14-LEGO/Misc.-LEGO-Tools](https://github.com/V14-LEGO/Misc.-LEGO-Tools/tree/main/BrickLink%20Studio%20Tools/Hidden%20Parts) から取得）とデフォルトの色。Studio を終了してから実行する |
 | `ideamaker/` | ideaMaker（3D プリンタ用スライサー）を公式の DMG からインストールする。Homebrew の cask は無効化されているため |
 | `lib/link.sh` | setup スクリプトで共通に使う、シンボリックリンクを作る関数 |
