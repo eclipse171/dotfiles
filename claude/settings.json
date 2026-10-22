@@ -60,6 +60,7 @@
       }
     ]
   },
+  "enableWorkflows": true,
   "statusLine": {
     "type": "command",
     "command": "/usr/bin/python3 -I \"$HOME/.claude/statusline.py\""
@@ -78,5 +79,5 @@
   "theme": "dark-daltonized",
   "editorMode": "normal",
   "switchModelsOnFlag": false,
-  "enableWorkflows": true
+  "agentPushNotifEnabled": true
 }
