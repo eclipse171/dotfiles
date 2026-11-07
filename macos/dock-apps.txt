@@ -18,5 +18,6 @@
 /Applications/Studio 2.0/Studio.app
 ~/Applications/Autodesk Fusion.app
 /Applications/ideaMaker.app
+/Applications/BambuStudio.app
 /Applications/Ghostty.app
 /System/Applications/Utilities/Activity Monitor.app
