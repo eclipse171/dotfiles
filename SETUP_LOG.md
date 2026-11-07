@@ -84,6 +84,12 @@ zsh claude/setup.sh           # ~/.claude/CLAUDE.md と ~/.claude/settings.json 
 | README に手順として書いていた自宅の Mac の sshd の hardening とスリープの無効化を、スクリプトに（`install.sh` からは実行しない） | `home/setup.sh` |
 | git の設定を追加（`fetch.prune`, `diff.algorithm = histogram`, `merge.conflictstyle = zdiff3`, `rerere.enabled`） | `git/gitconfig` |
 
+### 2026-11-06
+
+| 作業 | スクリプト |
+|---|---|
+| Bambu Studio を Brewfile でインストールし、Dock の ideaMaker の次に追加 | `Brewfile` + `macos/dock-apps.txt` |
+
 ## スクリプトにできないもの
 
 - **ウィジェットの配置（どのウィジェットをどこに置くか）**

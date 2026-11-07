@@ -19,3 +19,4 @@ cask "claude"             # /Applications/Claude.app
 cask "bricklink-studio"   # /Applications/Studio 2.0/Studio.app（pkg でインストール）
 cask "ghostty"            # /Applications/Ghostty.app
 cask "orbstack"           # /Applications/OrbStack.app（Docker の実行環境。docker コマンドも入る）
+cask "bambu-studio"       # /Applications/BambuStudio.app（Bambu Lab の 3D プリンタ用スライサー）
